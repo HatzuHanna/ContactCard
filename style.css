@@ -1,0 +1,105 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  touch-action: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+body {
+  display: grid;
+  height: 100dvh;
+  background-color: rgb(0, 0, 0);
+  place-items: center;
+}
+.square {
+  display: grid;
+  --width: 40%;
+  width: var(--width);
+  aspect-ratio: 1;
+  background-color: rgb(0, 0, 7);
+  place-items: center;
+  overflow: hidden;
+  box-shadow: 0 0 25px 25px black;
+  border-radius: 100%;
+  box-shadow: inset 0 0 50px 0.01px hsla(225, 77%, 81%, 0.095);
+}
+
+.innersquare {
+  position: relative;
+  --width: 50%;
+  width: var(--width);
+  /* background: rgb(255, 255, 255); */
+  aspect-ratio: 1;
+  border-radius: 100%;
+  animation: drop 15s infinite linear;
+  animation-play-state: running;
+
+  /* box-shadow: 0 0 20px 10px rgb(255, 255, 255); */
+}
+
+.innersquare::after {
+  position: absolute;
+  content: "";
+  --width: 100%;
+  width: var(--width);
+  aspect-ratio: 1;
+  background-color: rgb(162, 176, 248);
+  border-radius: 100%;
+  background: radial-gradient(
+    circle,
+    rgb(255, 255, 255) 0%,
+    rgb(249, 249, 249) 25%,
+    rgb(255, 255, 255) 40%,
+    rgb(185, 201, 228) 100%
+  );
+  background-size: 11% 11%;
+  animation: rotate 0.8s linear infinite;
+  box-shadow: 0 0 10px 5px rgb(131, 171, 245);
+  filter: blur(1px) brightness(0.01) invert(0.15);
+}
+
+.innersquare.clicked::after {
+  filter: blur(2px) brightness(0.8) invert(0.15);
+}
+
+.innersquare.clicked {
+  animation-play-state: paused;
+}
+
+.innersquare:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 431px) {
+  * {
+    scale: 1.15;
+  }
+
+  /* .innersquare::after {
+    animation: rotate 0.8s infinite linear;
+    background-size: 15% 15%;
+    box-shadow: 0 0 20px 1px rgb(131, 171, 245);
+  } */
+}
+
+@keyframes rotate {
+  from {
+    background-position: 0%;
+  }
+
+  to {
+    background-position: 100%;
+  }
+}
+
+@keyframes drop {
+  from {
+    transform: translateY(-155%);
+  }
+
+  to {
+    transform: translateY(155%);
+  }
+}
